@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import { Route, Switch, useRouteMatch} from 'react-router-dom';
-import { useEffectAsync } from "../useEffectAsync";
-import { axios } from "../axios";
+import { Route, Switch } from 'react-router-dom';
+import { useEffectAsync } from '../useEffectAsync';
+import { axios } from '../axios';
 import { css } from '@emotion/css';
-import { AdminOrdersPage } from "./AdminOrdersPage";
+import { AdminOrdersPage } from './AdminOrdersPage';
+import { CategoriesPage } from './CategoriesPage';
+import { AddCategoryPage } from "./AddCategoryPage";
 
 export const AdminPage = () => {
     return (
@@ -13,6 +15,8 @@ export const AdminPage = () => {
                 <Route exact path="/admin/products" component={ProductsPage} />
                 <Route exact path="/admin/products/add" component={AddProductPage} />
                 <Route exact path="/admin/orders" component={AdminOrdersPage} />
+                <Route exact path="/admin/categories" component={CategoriesPage} />
+                <Route exact path="/admin/categories/add" component={AddCategoryPage} />
             </Switch>
         </div>
     )

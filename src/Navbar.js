@@ -26,8 +26,6 @@ export const Navbar = withRouter(props => {
 
     const token = localStorage.getItem('token');
 
-    console.log('props', props);
-
     return (
         <div className={navbarStyle}>
             {isAdmin && (
@@ -35,7 +33,8 @@ export const Navbar = withRouter(props => {
                     <a className="navbar-brand" style={{ marginRight: 50 }} onClick={() => props.history.push('/admin/products')}>Shop</a>
                     <div onClick={() => props.history.push('/admin/users')} style={{ marginRight: 30 }}>Korisnici</div>
                     <div onClick={() => props.history.push('/admin/products')} style={{ marginRight: 30 }}>Proizvodi</div>
-                    <div onClick={() => props.history.push('/admin/orders')}>Narudzbe</div>
+                    <div onClick={() => props.history.push('/admin/orders')} style={{ marginRight: 30 }}>Narudzbe</div>
+                    <div onClick={() => props.history.push('/admin/categories')}>Kategorije</div>
                 </nav>
             )}
             {!isAdmin && (
