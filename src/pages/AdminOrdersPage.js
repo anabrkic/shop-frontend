@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useEffectAsync} from "../useEffectAsync";
 import {axios} from "../axios";
 import {css} from "@emotion/css";
+import { set, find } from 'lodash';
 
 const selectStyle = css`
     display: block;
@@ -20,13 +21,19 @@ const selectStyle = css`
     border-radius: .25rem;
 `;
 
+const statusLabels = { 0: 'U tijeku', 1: 'Obrada', 2: 'Otpremljeno', 3: 'Otkazano' };
+
 export const AdminOrdersPage = (props) => {
     const [ordersData, setOrdersData] = useState([]);
+    const [statuses, setStatuses] = useState([]);
 
     useEffectAsync(async () => {
         try {
             const { data } = await axios.get(`http://localhost:4000/orders`);
             setOrdersData(data);
+            console.log('data', data);
+            const statuses = data.map(order => ({ id: order?._id, status: parseInt(order.status) }));
+            setStatuses(statuses);
         } catch(err) {
             console.error(err);
         }
@@ -39,7 +46,23 @@ export const AdminOrdersPage = (props) => {
         }
     }
 
-    console.log('ordersData ', ordersData);
+    const handleStatusUpdate = async (event, id) => {
+        const status = event.target.value;
+        const statusesCopy = [...statuses];
+        set(find(statusesCopy, { id }), 'status', parseInt(status));
+        setStatuses(statusesCopy);
+    }
+
+    const handleSubmit = async () => {
+        for (let statusData of statuses) {
+            try {
+                await axios.put(`http://localhost:4000/orders/${statusData?.id}`, { status: statusData?.status });
+            } catch(err) {
+                console.error(err);
+            }
+        }
+        window.location.reload(false);
+    }
 
     return (
         <div className="container mt-5">
@@ -59,7 +82,14 @@ export const AdminOrdersPage = (props) => {
                 {ordersData.map((order, index) => (
                     <tr key={order?._id}>
                         <th scope="row">{index + 1}</th>
-                        <td>{order?.status}</td>
+                        <td>
+                            <select value={statuses[index]?.status} name="cars" id="cars" className={selectStyle} onChange={(e) => handleStatusUpdate(e, order?._id)}>
+                                <option value="" disabled>Odaberi status</option>
+                                {Object.values(statusLabels).map((label, index) => (
+                                    <option value={index}>{label}</option>
+                                ))}
+                            </select>
+                        </td>
                         <td>{order?.orderCode}</td>
                         <td>{order?.date}</td>
                         <td>{`${order?.address}, ${order?.postalCode} ${order?.city}`}</td>
@@ -71,6 +101,7 @@ export const AdminOrdersPage = (props) => {
                         </td>
                     </tr>
                 ))}
+                <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleSubmit}>Spremi izmjene</button>
                 </tbody>
             </table>
         </div>
