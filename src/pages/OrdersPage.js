@@ -3,6 +3,7 @@ import {useEffectAsync} from "../useEffectAsync";
 import { axios } from '../axios';
 import {Cart} from "../store/cart-store";
 import {observer} from "mobx-react-lite";
+import {statusLabels} from "./AdminOrdersPage";
 
 export const OrdersPage = ({ match }) => {
     const [ordersData, setOrdersData] = useState([]);
@@ -48,7 +49,7 @@ export const OrdersPage = ({ match }) => {
 const ItemRow = observer(({ status, orderCode, date, shipTo, totalCost }) => {
     return (
         <tr>
-            <td>{status}</td>
+            <td>{statusLabels[status]}</td>
             <td>{orderCode}</td>
             <td>{date}</td>
             <td>{shipTo}</td>

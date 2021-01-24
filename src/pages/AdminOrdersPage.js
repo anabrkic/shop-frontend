@@ -21,7 +21,7 @@ const selectStyle = css`
     border-radius: .25rem;
 `;
 
-const statusLabels = { 0: 'U tijeku', 1: 'Obrada', 2: 'Otpremljeno', 3: 'Otkazano' };
+export const statusLabels = { 0: 'U tijeku', 1: 'Obrada', 2: 'Otpremljeno', 3: 'Otkazano' };
 
 export const AdminOrdersPage = (props) => {
     const [ordersData, setOrdersData] = useState([]);
