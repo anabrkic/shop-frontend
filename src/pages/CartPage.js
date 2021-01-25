@@ -44,7 +44,7 @@ export const CartPage = observer(({ history }) => {
             </table>
             <div className="d-flex justify-content-end">
                 <button className="btn btn-secondary mx-2" onClick={() => history.push('/products')}>Nastavi s kupnjom</button>
-                <button className="btn btn-primary" onClick={() => history.push('/order')}>Naplata</button>
+                <button className="btn btn-primary" onClick={() => history.push('/order')} disabled={Cart.cartItems.length === 0}>Naplata</button>
             </div>
         </div>
     );
