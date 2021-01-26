@@ -74,7 +74,7 @@ export const ProductsPage = () => {
     }
 
     return (
-        <div className="container d-flex">
+        <div className="container d-flex w-100">
             <div className="d-flex flex-column p-3">
                 <Categories categories={[{ _id: 0, name: 'Sve' }].concat(data)} onCategoryClick={handleCategoryClick}/>
             </div>
@@ -96,7 +96,7 @@ export const ProductsPage = () => {
                 </div>
                 {currentProducts?.length === 0 && <div className="p-3">Nema proizvoda</div>}
                 {currentProducts?.length > 0 && (
-                    <div className="d-flex flex-wrap p-3">
+                    <div className="d-flex flex-wrap p-3 w-100">
                         {currentProducts.map(product => <Card product={product} />)}
                     </div>
                 )}
@@ -130,7 +130,7 @@ const Card = withRouter(({ history, product }) => {
     return (
         <div style={{ width: '33%', padding: 10 }}>
             <div className="card">
-                <img className="card-img-top" src={product?.imageUrl} alt="Card image cap" style={{ height: 300 }} />
+                <img className="card-img-top" src={product?.imageUrl} alt="Card image cap" style={{ height: 300, width: '100%' }} />
                 <div className="card-body">
                     <h5 className="card-title">{product?.name}</h5>
                     <p className="card-text">{product?.description}</p>
