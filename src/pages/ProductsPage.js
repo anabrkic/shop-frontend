@@ -128,8 +128,8 @@ const Categories = ({ categories, onCategoryClick }) => {
 
 const Card = withRouter(({ history, product }) => {
     return (
-        <div style={{ width: '33%', padding: 10 }}>
-            <div className="card">
+        <div>
+            <div className="card" style={{ width: 350, marginRight: 10 }}>
                 <img className="card-img-top" src={product?.imageUrl} alt="Card image cap" style={{ height: 300, width: '100%' }} />
                 <div className="card-body">
                     <h5 className="card-title">{product?.name}</h5>
