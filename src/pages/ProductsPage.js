@@ -90,8 +90,7 @@ export const ProductsPage = () => {
                         <select className="form-select" style={{ width: '30%' }} onChange={handleSortChange}>
                             <option value="" disabled selected hidden>Sort</option>
                             <option value="priceAsc">Cijena, niska prema visokoj</option>
-                            <option value="priceDesc">Cijena, visoka prema niskoj</option>
-                            <option value="bestSelling">Najprodavanije</option>
+                            <option value="priceDesc">Cijena, visoka prema niskoj</option><option value="bestSelling">Najprodavanije</option>
                         </select>
                     </div>
                 </div>

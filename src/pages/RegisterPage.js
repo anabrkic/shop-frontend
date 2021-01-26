@@ -43,6 +43,10 @@ export const RegisterPage = ({ history }) => {
                 <input type="password" className="form-control" id="passwordInput" value={password} onChange={(event) => setPassword(event.target.value)} />
             </div>
             <button type="submit" className="btn btn-primary" onClick={handleSignup}>Registracija</button>
+            <div className="d-flex flex-row mb-3 justify-content-center">
+                <div style={{ marginRight: 10 }}>Imate account?</div>
+                <a href="#" onClick={() => history.push('/login')}>Logiraj se</a>
+            </div>
         </div>
     )
 }
