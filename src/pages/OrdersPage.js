@@ -19,12 +19,12 @@ export const OrdersPage = ({ match }) => {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-center" style={{ padding: '50px 0' }}>Narudzbe</div>
+            <div className="d-flex justify-content-center" style={{ padding: '50px 0', fontFamily: "Tahoma", fontSize: 24 }}>Narudžbe</div>
             <table className="table">
-                <thead>
+                <thead Style="font-family: Tahoma; color: gray">
                 <tr>
                     <th scope="col">Status</th>
-                    <th scope="col">Broj narudzbe</th>
+                    <th scope="col">Broj narudžbe</th>
                     <th scope="col">Datum</th>
                     <th scope="col">Lokacija dostave</th>
                     <th scope="col">Cijena</th>
@@ -48,7 +48,7 @@ export const OrdersPage = ({ match }) => {
 
 const ItemRow = observer(({ status, orderCode, date, shipTo, totalCost }) => {
     return (
-        <tr>
+        <tr Style="font-family: Tahoma">
             <td>{statusLabels[status]}</td>
             <td>{orderCode}</td>
             <td>{date}</td>

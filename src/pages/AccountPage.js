@@ -32,20 +32,20 @@ export const AccountPage = ({ match, history }) => {
 
     return (
         <div className="d-flex flex-column align-items-center w-100 mt-5">
-            <PersonIcon width="100px" height="100px" />
-            <div className="mb-3 w-50">
-                <label htmlFor="emailInput" className="form-label">Email</label>
-                <input type="email" className="form-control" id="emailInput" value={userData.email} onChange={(event) => handleChange(event, 'email')} />
+            <PersonIcon width="100px" height="100px" color="gray"/>
+            <div className="col-xs-2 col-lg-3 mb-3">
+                <label htmlFor="emailInput" className="form-label" Style="font-family: Tahoma">Email</label>
+                <input type="email" className="form-control" id="emailInput" Style="font-family: Tahoma" value={userData.email} onChange={(event) => handleChange(event, 'email')} />
             </div>
-            <div className="mb-3 w-50">
-                <label htmlFor="firstNameInput" className="form-label">Ime</label>
-                <input type="text" className="form-control" id="firstNameInput" value={userData.firstName} onChange={(event) => handleChange(event, 'firstName')} />
+            <div className="col-xs-2 col-lg-3 mb-3">
+                <label htmlFor="firstNameInput" className="form-label" Style="font-family: Tahoma">Ime</label>
+                <input type="text" className="form-control" id="firstNameInput" Style="font-family: Tahoma" value={userData.firstName} onChange={(event) => handleChange(event, 'firstName')} />
             </div>
-            <div className="mb-3 w-50">
-                <label htmlFor="lastNameInput" className="form-label">Ime</label>
-                <input type="text" className="form-control" id="lastNameInput" value={userData.lastName} onChange={(event) => handleChange(event, 'lastName')} />
+            <div className="col-xs-2 col-lg-3 mb-3">
+                <label htmlFor="lastNameInput" className="form-label" Style="font-family: Tahoma" >Prezime</label>
+                <input type="text" className="form-control" id="lastNameInput" Style="font-family: Tahoma" value={userData.lastName} onChange={(event) => handleChange(event, 'lastName')} />
             </div>
-            <button type="submit" className="btn btn-primary w-50 mt-2" onClick={handleSubmit}>Pohrani podatke</button>
+            <button type="submit" className="btn btn-outline-secondary mt-2" Style="font-family:Tahoma;" onClick={handleSubmit}>Pohrani podatke</button>
         </div>
     );
 }

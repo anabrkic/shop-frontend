@@ -9,7 +9,9 @@ import { axios } from './axios';
 
 const navbarStyle = css`
     border-bottom: 1px solid #f4f4f4;
+    background-color: #f2f2f2;
     padding: 0 50px;
+    font-family: Tahoma;
 `
 
 export const Navbar = withRouter(props => {
@@ -33,7 +35,7 @@ export const Navbar = withRouter(props => {
                     <a className="navbar-brand" style={{ marginRight: 50 }} onClick={() => props.history.push('/admin/products')}>Shop</a>
                     <div onClick={() => props.history.push('/admin/users')} style={{ marginRight: 30 }}>Korisnici</div>
                     <div onClick={() => props.history.push('/admin/products')} style={{ marginRight: 30 }}>Proizvodi</div>
-                    <div onClick={() => props.history.push('/admin/orders')} style={{ marginRight: 30 }}>Narudzbe</div>
+                    <div onClick={() => props.history.push('/admin/orders')} style={{ marginRight: 30 }}>Narudžbe</div>
                     <div onClick={() => props.history.push('/admin/categories')}>Kategorije</div>
                 </nav>
             )}

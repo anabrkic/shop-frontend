@@ -25,7 +25,7 @@ export const CategoriesPage = ({ history }) => {
     return (
         <div className="container mt-5">
             <table className="table">
-                <thead>
+                <thead Style="font-family: Tahoma; color: gray">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
@@ -38,7 +38,7 @@ export const CategoriesPage = ({ history }) => {
                         <th scope="row">{index + 1}</th>
                         <td>{category.name}</td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(category._id)}>
+                            <button type="submit" className="btn btn-danger" onClick={() => handleDelete(category._id)}>
                                 X
                             </button>
                         </td>
@@ -46,7 +46,7 @@ export const CategoriesPage = ({ history }) => {
                 ))}
                 </tbody>
             </table>
-            <button type="submit" className="btn btn-primary" onClick={handleAddCategory}>
+            <button type="submit" className="btn btn-dark" style={{ fontFamily: "Tahoma" }} onClick={handleAddCategory}>
                 Dodaj kategoriju
             </button>
         </div>

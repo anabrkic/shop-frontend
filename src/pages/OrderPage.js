@@ -23,11 +23,11 @@ export const OrderPage = observer((props) => {
     }
 
     return (
-        <div className="container d-flex flex-row">
+        <div className="container d-flex flex-row" Style="font-family: Tahoma">
             <div className="w-50 p-5">
-                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>Podaci o kupcu</div>
+                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0', fontSize: 24 }}>Podaci o kupcu</div>
                 <div className="mb-3">
-                    <label htmlFor="nameInput" className="form-label">Ime</label>
+                    <label htmlFor="nameInput" className="form-label" required>Ime</label>
                     <input type="email" className="form-control" id="nameInput" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
                 </div>
                 <div className="mb-3">
@@ -52,7 +52,7 @@ export const OrderPage = observer((props) => {
                 </div>
             </div>
             <div className="w-50 p-5">
-                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>Podaci za dostavu</div>
+                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0', fontSize: 24 }}>Podaci za dostavu</div>
                 {Cart.cartItems.map(cartItem => (
                     <div className="d-flex flex-row pb-3">
                         <img
@@ -93,7 +93,7 @@ export const OrderPage = observer((props) => {
                     <div style={{ fontSize: 16 }}>Ukupno</div>
                     <div style={{ fontSize: 16, fontWeight: 'bold', color: '#535353' }}>{`${Cart.totalCost},00kn`}</div>
                 </div>
-                <button type="submit" className="btn btn-primary w-100 mt-2" onClick={handleOrder}>Naruci</button>
+                <button type="submit" className="btn btn-outline-dark w-40 mt-2" Style=" margin-left: 80%;" onClick={handleOrder}>Naruci</button>
             </div>
         </div>
     );

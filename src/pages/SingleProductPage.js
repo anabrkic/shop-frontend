@@ -60,17 +60,17 @@ export const SingleProductPage = ({ match, history }) => {
                 >
                     <div>
                         <div className="d-flex flex-row justify-content-between p-3" style={{ borderBottom: '1px solid #f4f4f4' }}>
-                            <div style={{ fontSize: 24 }}>Naziv proizvoda</div>
-                            <div style={{ fontSize: 24, fontWeight: 'bold', height: 'auto' }}>{product?.name}</div>
+                            <div style={{ fontFamily: "Tahoma", fontSize: 24 }}>Naziv proizvoda</div>
+                            <div style={{ fontFamily: "Tahoma", fontSize: 24, fontWeight: 'bold', height: 'auto' }}>{product?.name}</div>
                         </div>
                         <div className="d-flex flex-row justify-content-between p-3" style={{ borderBottom: '1px solid #f4f4f4' }}>
-                            <div style={{ fontSize: 24 }}>Opis proizvoda</div>
-                            <div style={{ fontSize: 24, fontWeight: 'bold', height: 'auto' }}>{product?.description}</div>
+                            <div style={{ fontFamily: "Tahoma", fontSize: 24 }}>Opis proizvoda</div>
+                            <div style={{ fontFamily: "Tahoma", fontSize: 24, fontWeight: 'bold', height: 'auto' }}>{product?.description}</div>
                         </div>
                     </div>
                     <div className="d-flex flex-row justify-content-between mt-3">
-                        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#535353' }}>{`${product?.price},00kn`}</div>
-                        <button className="btn btn-primary" onClick={handleAddToCart} style={{ width: '35%' }} disabled={!loggedIn}>Dodaj u kosaricu</button>
+                        <div style={{ fontFamily: "Tahoma", fontSize: 24, fontWeight: 'bold', color: '#535353' }}>{`${product?.price},00kn`}</div>
+                        <button className="btn btn-outline-dark" Style="font-family: Tahoma;" onClick={handleAddToCart} style={{ width: '35%' }} disabled={!loggedIn}>Dodaj u kosaricu</button>
                     </div>
                 </div>
             </div>

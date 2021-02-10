@@ -16,12 +16,12 @@ export const AddCategoryPage = (props) => {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>Kategorija</div>
+            <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0', fontFamily:"Tahoma", fontSize: 24 }}>Kategorija</div>
             <div className="mb-3">
-                <label htmlFor="nameInput" className="form-label">Ime</label>
+                <label htmlFor="nameInput" className="form-label" style={{ fontFamily:"Tahoma" }}>Ime</label>
                 <input type="text" className="form-control" id="nameInput" value={name} onChange={(event) => setName(event.target.value)} />
             </div>
-            <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleAddCategory}>Dodaj kategoriju</button>
+            <button type="submit" className="btn btn-dark" style={{ marginTop: 10, fontFamily: "Tahoma" }} onClick={handleAddCategory}>Spremi</button>
         </div>
     )
 }
