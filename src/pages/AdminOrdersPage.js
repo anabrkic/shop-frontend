@@ -8,6 +8,7 @@ const selectStyle = css`
     display: block;
     width: 100%;
     padding: .375rem .75rem;
+    font-family: Tahoma;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -67,11 +68,11 @@ export const AdminOrdersPage = (props) => {
     return (
         <div className="container mt-5">
             <table className="table">
-                <thead>
+                <thead Style="font-family: Tahoma; color: gray;">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Broj narudzbe</th>
+                    <th scope="col">Broj narudžbe</th>
                     <th scope="col">Datum</th>
                     <th scope="col">Lokacija dostave</th>
                     <th scope="col">Cijena</th>
@@ -95,13 +96,13 @@ export const AdminOrdersPage = (props) => {
                         <td>{`${order?.address}, ${order?.postalCode} ${order?.city}`}</td>
                         <td>{`${order?.totalCost}`}</td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleOrderDelete(order?._id)}>
+                            <button type="submit" className="btn btn-danger" onClick={() => handleOrderDelete(order?._id)}>
                                 X
                             </button>
                         </td>
                     </tr>
                 ))}
-                <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleSubmit}>Spremi izmjene</button>
+                <button type="submit" className="btn btn-dark" style={{ marginTop: 10, fontFamily: "Tahoma" }} onClick={handleSubmit}>Spremi izmjene</button>
                 </tbody>
             </table>
         </div>

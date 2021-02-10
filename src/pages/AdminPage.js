@@ -40,7 +40,7 @@ const UsersPage = () => {
     return (
         <div className="container mt-5">
             <table className="table">
-                <thead>
+                <thead Style="font-family: Tahoma; color: gray">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Email</th>
@@ -57,7 +57,7 @@ const UsersPage = () => {
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(user.id)}>
+                            <button type="submit" className="btn btn-danger" onClick={() => handleDelete(user.id)}>
                                 X
                             </button>
                         </td>
@@ -91,7 +91,7 @@ const ProductsPage = (props) => {
     return (
         <div className="container mt-5">
             <table className="table">
-                <thead>
+                <thead Style="font-family: Tahoma; color: gray">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
@@ -108,7 +108,7 @@ const ProductsPage = (props) => {
                         <td>{user.material}</td>
                         <td>{`${user.price},00 kn`}</td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(user._id)}>
+                            <button type="submit" className="btn btn-danger" onClick={() => handleDelete(user._id)}>
                                 X
                             </button>
                         </td>
@@ -116,7 +116,7 @@ const ProductsPage = (props) => {
                 ))}
                 </tbody>
             </table>
-            <button type="submit" className="btn btn-primary" onClick={handleAddProduct}>
+            <button type="submit" className="btn btn-dark" style={{ fontFamily: "Tahoma" }}onClick={handleAddProduct}>
                 Dodaj proizvod
             </button>
         </div>
@@ -166,30 +166,30 @@ const AddProductPage = (props) => {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>Podaci za dostavu</div>
+            <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0', fontFamily: "Tahoma", fontSize: 24 }}>Podaci o proizvodu</div>
             <div className="mb-3">
-                <label htmlFor="nameInput" className="form-label">Ime</label>
+                <label htmlFor="nameInput" className="form-label" style={{ fontFamily: "Tahoma" }}>Ime</label>
                 <input type="text" className="form-control" id="nameInput" value={name} onChange={(event) => setName(event.target.value)} />
             </div>
             <div className="mb-3">
-                <label htmlFor="priceInput" className="form-label">Cijena</label>
+                <label htmlFor="priceInput" className="form-label" style={{ fontFamily: "Tahoma" }}>Cijena</label>
                 <input type="number" className="form-control" id="priceInput" value={price} onChange={(event) => setPrice(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="imageUrlInput" className="form-label">URL Slike</label>
+                <label htmlFor="imageUrlInput" className="form-label" style={{ fontFamily: "Tahoma" }}>URL Slike</label>
                 <input type="text" className="form-control" id="imageUrlInput" value={imageUrl} onChange={(event) => setImageUrl(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="materialInput" className="form-label">Materijal</label>
+                <label htmlFor="materialInput" className="form-label" style={{ fontFamily: "Tahoma" }}>Materijal</label>
                 <input type="text" className="form-control" id="materialInput" value={material} onChange={(event) => setMaterial(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="descriptionInput" className="form-label">Opis</label>
+                <label htmlFor="descriptionInput" className="form-label" style={{ fontFamily: "Tahoma" }}>Opis</label>
                 <input type="text" className="form-control" id="descriptionInput" value={description} onChange={(event) => setDescription(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="category" className="form-label">Kategorija</label>
-                <select value={categoryId} name="cars" id="cars" className={selectStyle} onChange={(e) => setCategoryId(e.target.value)}>
+                <label htmlFor="category" className="form-label" style={{ fontFamily: "Tahoma" }} >Kategorija</label>
+                <select value={categoryId} name="cars" id="cars" style={{ fontFamily: "Tahoma" }} className={selectStyle} onChange={(e) => setCategoryId(e.target.value)}>
                     <option value="" disabled>Odaberi kategoriju</option>
                     {categories.map(category => (
                         <option value={category._id}>{category.name}</option>
@@ -209,7 +209,7 @@ const AddProductPage = (props) => {
             {/*<div className="mb-3">*/}
             {/*    <input type="text" className="form-control" id="phoneInput" value={activeCategory} />*/}
             {/*</div>*/}
-            <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleAddProduct}>Dodaj proizvod</button>
+            <button type="submit" className="btn btn-dark" style={{ marginTop: 10, fontFamily: "Tahoma" }} onClick={handleAddProduct}>Dodaj proizvod</button>
         </div>
     )
 }

@@ -26,8 +26,8 @@ export const CartPage = observer(({ history }) => {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-center" style={{ padding: '50px 0' }}>Kosarica</div>
-            <table className="table">
+            <div className="d-flex justify-content-center" style={{ padding: '50px 0', fontFamily: "Tahoma", fontSize: 24 }}>Košarica</div>
+            <table className="table" Style="font-family: Tahoma; color: dark-gray">
                 <thead>
                 <tr>
                     <th scope="col">Proizvod</th>
@@ -42,9 +42,9 @@ export const CartPage = observer(({ history }) => {
                 ))}
                 </tbody>
             </table>
-            <div className="d-flex justify-content-end">
-                <button className="btn btn-secondary mx-2" onClick={() => history.push('/products')}>Nastavi s kupnjom</button>
-                <button className="btn btn-primary" onClick={() => history.push('/order')} disabled={Cart.cartItems.length === 0}>Naplata</button>
+            <div className="d-flex justify-content-end" Style="font-family: Tahoma">
+                <button className="btn btn-outline-secondary mx-2" onClick={() => history.push('/products')}>Nastavi s kupnjom</button>
+                <button className="btn btn-outline-dark" onClick={() => history.push('/order')} disabled={Cart.cartItems.length === 0}>Naplata</button>
             </div>
         </div>
     );
@@ -57,9 +57,9 @@ const ItemRow = observer(({ name, price, quantity, id }) => {
             <td>{`${price}kn`}</td>
             <td>
                 <div className="d-flex">
-                    <button className="btn btn-secondary" onClick={() => Cart.decreaseItemCount(id)} style={{ width: 50 }}>-</button>
-                    <input className="mx-2" value={quantity} style={{ width: 100 }}/>
-                    <button className="btn btn-primary" onClick={() => Cart.increaseItemCount(id)} style={{ width: 50 }}>+</button>
+                    <button className="btn btn-outline-secondary" onClick={() => Cart.decreaseItemCount(id)} style={{ width: 40 }}>-</button>
+                    <input className="mx-2" value={quantity} style={{ width: 60 }}/>
+                    <button className="btn btn-outline-secondary" onClick={() => Cart.increaseItemCount(id)} style={{ width: 40 }}>+</button>
                 </div>
             </td>
             <td>{`${price*quantity}kn`}</td>

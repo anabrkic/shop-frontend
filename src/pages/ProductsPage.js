@@ -7,6 +7,7 @@ import {withRouter} from "react-router";
 const categoryNameStyle = css`
     border-bottom: 1px solid #f4f4f4;
     padding: 10px 5px;
+    font-family: Tahoma;
 `;
 
 export const ProductsPage = () => {
@@ -75,26 +76,26 @@ export const ProductsPage = () => {
 
     return (
         <div className="container d-flex w-100">
-            <div className="d-flex flex-column p-3">
+            <div className="d-flex flex-column p-3" Style="font-family: Tahoma">
                 <Categories categories={[{ _id: 0, name: 'Sve' }].concat(data)} onCategoryClick={handleCategoryClick}/>
             </div>
             <div>
                 <div className="p-4">
                     <div className="d-flex flex-row">
-                        <select className="form-select" style={{ width: '30%', marginRight: 10 }} onChange={handleFilterChange}>
+                        <select className="form-select" style={{ width: '30%', marginRight: 10, fontFamily: "Tahoma" }} onChange={handleFilterChange}>
                             <option value="" disabled selected hidden>Filter</option>
                             <option value="all">Sve</option>
                             <option value="gold">Zlato</option>
                             <option value="silver">Srebro</option>
                         </select>
-                        <select className="form-select" style={{ width: '30%' }} onChange={handleSortChange}>
+                        <select className="form-select" style={{ width: '30%', fontFamily: "Tahoma" }} onChange={handleSortChange}>
                             <option value="" disabled selected hidden>Sort</option>
                             <option value="priceAsc">Cijena, niska prema visokoj</option>
                             <option value="priceDesc">Cijena, visoka prema niskoj</option><option value="bestSelling">Najprodavanije</option>
                         </select>
                     </div>
                 </div>
-                {currentProducts?.length === 0 && <div className="p-3">Nema proizvoda</div>}
+                {currentProducts?.length === 0 && <div className="p-3" style={{ fontFamily: "Tahoma", fontSize: 20 }}>Nema proizvoda</div>}
                 {currentProducts?.length > 0 && (
                     <div className="d-flex flex-wrap p-3 w-100">
                         {currentProducts.map(product => <Card product={product} />)}
@@ -102,7 +103,9 @@ export const ProductsPage = () => {
                 )}
                 <ul className="pagination justify-content-center">
                     {pageNumbers.map(number => (
-                        <li className={`page-item ${currentPage === number ? 'active' : 'none'}`}><a className="page-link" href="#" onClick={() => setCurrentPage(number)}>{number}</a></li>
+                        <li className={`page-item ${currentPage === number ? 'active' : 'none'}`}>
+                            <a className="page-link" Style="background-color:white; color:black;" 
+                            href="#" onClick={() => setCurrentPage(number)}>{number}</a></li>
                     ))}
                 </ul>
             </div>
@@ -136,7 +139,7 @@ const Card = withRouter(({ history, product }) => {
                     <p className="card-text">{product?.description}</p>
                     <div className="d-flex flex-row justify-content-between">
                         <div style={{ fontSize: 24, fontWeight: 'bold', color: '#535353' }}>{`${product?.price},00kn`}</div>
-                        <a href="#" className="btn btn-primary" onClick={() => history.push(`/product/${product?._id}`)}>Kupi</a>
+                        <a href="#" className="btn btn-dark" Style="font-family: Tahoma" onClick={() => history.push(`/product/${product?._id}`)}>Više</a>
                     </div>
                 </div>
             </div>
