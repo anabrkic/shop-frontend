@@ -8,11 +8,14 @@ export const LoginPage = ({ history }) => {
     const handleLogin = async () => {
         try {
             const response = await axios.post('login', { email, password });
+            console.log('response', response);
             const id = response.data?.user._id;
             const token = response.data?.token;
+            const role = response.data?.user?.role;
             localStorage.setItem('userId', id);
             localStorage.setItem('token', token);
-            history.push('/products');
+            localStorage.setItem('role', role);
+            history.push('/');
         } catch(err) {
             console.error(err);
         }

@@ -16,8 +16,6 @@ export const SingleProductPage = ({ match, history }) => {
     }
 
     const product = data[0] || undefined;
-    console.log('PRODUCT', product);
-
 
     // useEffectAsync(async () => {
     //     try {
@@ -40,7 +38,10 @@ export const SingleProductPage = ({ match, history }) => {
         } catch(err) {
             console.error(err);
         }
+        history.push('/cart');
     }
+
+    const loggedIn = !!localStorage.getItem('userId');
 
     return (
         <div className="container" style={{ paddingTop: 50 }}>
@@ -64,9 +65,9 @@ export const SingleProductPage = ({ match, history }) => {
                             <div style={{ fontSize: 24, fontWeight: 'bold', height: 'auto' }}>{product?.description}</div>
                         </div>
                     </div>
-                    <div className="d-flex flex-row justify-content-between">
+                    <div className="d-flex flex-row justify-content-between mt-3">
                         <div style={{ fontSize: 24, fontWeight: 'bold', color: '#535353' }}>{`${product?.price},00kn`}</div>
-                        <a href="#" className="btn btn-primary" onClick={handleAddToCart} style={{ width: '35%' }}>Dodaj u kosaricu</a>
+                        <button className="btn btn-primary" onClick={handleAddToCart} style={{ width: '35%' }} disabled={!loggedIn}>Dodaj u kosaricu</button>
                     </div>
                 </div>
             </div>

@@ -15,8 +15,6 @@ export const CartPage = observer(({ history }) => {
             let i = 0;
             for (const item of cartItems) {
                 const { data } = await axios.get(`http://localhost:4000/products/${item?.productId}`);
-                // console.log('product', product);
-                console.log('data', data);
                 cartItems[i] = { ...cartItems[i], name: data[0]?.name, price: data[0]?.price };
                 i++;
             }
@@ -26,12 +24,8 @@ export const CartPage = observer(({ history }) => {
         }
     }, []);
 
-    // console.log('cartItems', cartItems);
-    // console.log('Cart.cartItems', Cart.cartItems);
-
     return (
         <div className="container">
-            {/*<div>{Cart.cartItems.map(cartItem => <div>{cartItem}</div>)}</div>*/}
             <div className="d-flex justify-content-center" style={{ padding: '50px 0' }}>Kosarica</div>
             <table className="table">
                 <thead>
@@ -57,9 +51,6 @@ export const CartPage = observer(({ history }) => {
 });
 
 const ItemRow = observer(({ name, price, quantity, id }) => {
-    // const [count, setCount] = useState(1);
-    console.log('id', id);
-
     return (
         <tr>
             <td>{name}</td>

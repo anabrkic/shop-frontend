@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { axios } from '../axios';
 
-export const RegisterPage = (props) => {
+export const RegisterPage = ({ history }) => {
     const [email, setEmail] = useState(undefined);
     const [firstName, setFirstName] = useState(undefined);
     const [lastName, setLastName] = useState(undefined);
@@ -9,11 +9,15 @@ export const RegisterPage = (props) => {
 
     const handleSignup = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/signup', { email, firstName, lastName, password }, { headers: { 'Content-Type': 'application/json' } });
-            if (response.data._id !== null) {
-                alert('Korisnik uspjesno registriran!');
-                props.history.push('/products');
-            }
+            const response = await axios.post('/signup', { email, firstName, lastName, password }, { headers: { 'Content-Type': 'application/json' } });
+            const id = response.data?.user._id;
+            const token = response.data?.token;
+            const role = response.data?.user?.role;
+            localStorage.setItem('userId', id);
+            localStorage.setItem('token', token);
+            localStorage.setItem('role', role);
+            alert('Korisnik uspjesno registriran!');
+            history.push('/');
         } catch(err) {
             console.error(err);
         }

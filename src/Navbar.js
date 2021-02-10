@@ -34,7 +34,8 @@ export const Navbar = withRouter(props => {
                 <nav className="navbar navbar-light justify-content-start">
                     <a className="navbar-brand" style={{ marginRight: 50 }} onClick={() => props.history.push('/admin/products')}>Shop</a>
                     <div onClick={() => props.history.push('/admin/users')} style={{ marginRight: 30 }}>Korisnici</div>
-                    <div onClick={() => props.history.push('/admin/products')}>Proizvodi</div>
+                    <div onClick={() => props.history.push('/admin/products')} style={{ marginRight: 30 }}>Proizvodi</div>
+                    <div onClick={() => props.history.push('/admin/orders')}>Narudzbe</div>
                 </nav>
             )}
             {!isAdmin && (
@@ -45,22 +46,47 @@ export const Navbar = withRouter(props => {
                         {!isNil(token) &&
                             <div className="d-flex flex-column" onClick={() => setIsDropdownVisible(!isDropdownVisible)} style={{ marginRight: 20, position: 'relative' }}>
                                 <PersonIcon width="25px" height="25px" />
-                                {isDropdownVisible && <div style={{ position: 'absolute', top: 40, border: '1px solid #f4f4f4', borderRadius: 2 }}>
+                                {isDropdownVisible && <div style={{ position: 'absolute', top: 40, border: '1px solid #f4f4f4', borderRadius: 2, display: 'flex', flexDirection: 'column', zIndex: 100, backgroundColor: 'white' }}>
+                                    <a
+                                        className="navbar-brand"
+                                        onClick={() => {
+                                            const id = localStorage.getItem('userId');
+                                            props.history.push(`/account/${id}`);
+                                        }}
+                                        style={{ fontSize: 14, marginLeft: 10}}
+                                    >Account</a>
+                                    <a
+                                        className="navbar-brand"
+                                        onClick={() => {
+                                            const id = localStorage.getItem('userId');
+                                            props.history.push(`/orders/${id}`);
+                                        }}
+                                        style={{ fontSize: 14, marginLeft: 10 }}
+                                    >Orders</a>
                                     <a
                                         className="navbar-brand"
                                         onClick={() => {
                                             props.history.push('/login');
                                             delete axios.defaults.headers['Authorization'];
                                             localStorage.removeItem('token');
+                                            localStorage.removeItem('userId');
+                                            localStorage.removeItem('role');
                                         }}
-                                        style={{ fontSize: 14 }}
+                                        style={{ fontSize: 14, marginLeft: 10 }}
                                     >Logout</a>
                                 </div>}
                             </div>
                         }
-                        <div onClick={() => props.history.push('/cart')}>
-                            <CartIcon width="25px" height="25px" />
-                        </div>
+                        {isNil(token) &&
+                            <div onClick={() => props.history.push('/login')} style={{ marginRight: 10 }}>
+                                Login
+                            </div>
+                        }
+                        {!isNil(token) &&
+                            <div onClick={() => props.history.push('/cart')}>
+                                <CartIcon width="25px" height="25px"/>
+                            </div>
+                        }
                     </div>
                 </nav>
             )}
