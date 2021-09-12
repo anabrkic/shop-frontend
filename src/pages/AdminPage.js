@@ -6,6 +6,8 @@ import { css } from '@emotion/css';
 import { AdminOrdersPage } from './AdminOrdersPage';
 import { CategoriesPage } from './CategoriesPage';
 import { AddCategoryPage } from "./AddCategoryPage";
+import {Typography} from "../Typography";
+import {white} from "../colors";
 
 export const AdminPage = () => {
     return (
@@ -42,22 +44,22 @@ const UsersPage = () => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col"><Typography>#</Typography></th>
+                    <th scope="col"><Typography>Email</Typography></th>
+                    <th scope="col"><Typography>Ime</Typography></th>
+                    <th scope="col"><Typography>Prezime</Typography></th>
+                    <th scope="col"><Typography>Izbriši</Typography></th>
                 </tr>
                 </thead>
                 <tbody>
                 {users.map((user, index) => (
                     <tr>
-                        <th scope="row">{index + 1}</th>
-                        <td>{user.email}</td>
-                        <td>{user.firstName}</td>
-                        <td>{user.lastName}</td>
+                        <th scope="row"><Typography fontWeight={400} fontSize={16}>{index + 1}</Typography></th>
+                        <td><Typography fontWeight={400} fontSize={16}>{user.email}</Typography></td>
+                        <td><Typography fontWeight={400} fontSize={16}>{user.firstName}</Typography></td>
+                        <td><Typography fontWeight={400} fontSize={16}>{user.lastName}</Typography></td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(user.id)}>
+                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(user.id)} style={{ width: 50, backgroundColor: 'transparent', borderColor: 'white' }}>
                                 X
                             </button>
                         </td>
@@ -93,22 +95,22 @@ const ProductsPage = (props) => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Material</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col"><Typography fontWeight={400} fontSize={16}>#</Typography></th>
+                    <th scope="col"><Typography fontWeight={400} fontSize={16}>Name</Typography></th>
+                    <th scope="col"><Typography fontWeight={400} fontSize={16}>Materijal</Typography></th>
+                    <th scope="col"><Typography fontWeight={400} fontSize={16}>Cijena</Typography></th>
+                    <th scope="col"><Typography fontWeight={400} fontSize={16}>Izbriši</Typography></th>
                 </tr>
                 </thead>
                 <tbody>
                 {products.map((user, index) => (
                     <tr>
-                        <th scope="row">{index + 1}</th>
-                        <td>{user.name}</td>
-                        <td>{user.material}</td>
-                        <td>{`${user.price},00 kn`}</td>
+                        <th scope="row"><Typography fontWeight={400} fontSize={16}>{index + 1}</Typography></th>
+                        <td><Typography fontWeight={400} fontSize={16}>{user.name}</Typography></td>
+                        <td><Typography fontWeight={400} fontSize={16}>{user.material}</Typography></td>
+                        <td><Typography fontWeight={400} fontSize={16}>{`${user.price},00 kn`}</Typography></td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(user._id)}>
+                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(user._id)} style={{ width: 50, backgroundColor: 'transparent', borderColor: 'white' }}>
                                 X
                             </button>
                         </td>
@@ -116,7 +118,7 @@ const ProductsPage = (props) => {
                 ))}
                 </tbody>
             </table>
-            <button type="submit" className="btn btn-primary" onClick={handleAddProduct}>
+            <button type="submit" className="btn btn-primary" onClick={handleAddProduct} style={{ width: 200, backgroundColor: '#b29e99', borderColor: 'white', marginBottom: 50 }}>
                 Dodaj proizvod
             </button>
         </div>
@@ -166,29 +168,43 @@ const AddProductPage = (props) => {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>Podaci za dostavu</div>
+            <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>
+                <Typography fontWeight={600} fontSize={24} color={white}>Podaci za dostavu</Typography>
+            </div>
             <div className="mb-3">
-                <label htmlFor="nameInput" className="form-label">Ime</label>
+                <label htmlFor="nameInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16}>Ime</Typography>
+                </label>
                 <input type="text" className="form-control" id="nameInput" value={name} onChange={(event) => setName(event.target.value)} />
             </div>
             <div className="mb-3">
-                <label htmlFor="priceInput" className="form-label">Cijena</label>
+                <label htmlFor="priceInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16}>Cijena</Typography>
+                </label>
                 <input type="number" className="form-control" id="priceInput" value={price} onChange={(event) => setPrice(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="imageUrlInput" className="form-label">URL Slike</label>
+                <label htmlFor="imageUrlInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16}>URL Slike</Typography>
+                </label>
                 <input type="text" className="form-control" id="imageUrlInput" value={imageUrl} onChange={(event) => setImageUrl(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="materialInput" className="form-label">Materijal</label>
+                <label htmlFor="materialInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16}>Materijal</Typography>
+                </label>
                 <input type="text" className="form-control" id="materialInput" value={material} onChange={(event) => setMaterial(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="descriptionInput" className="form-label">Opis</label>
+                <label htmlFor="descriptionInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16}>Opis</Typography>
+                </label>
                 <input type="text" className="form-control" id="descriptionInput" value={description} onChange={(event) => setDescription(event.target.value)}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="category" className="form-label">Kategorija</label>
+                <label htmlFor="category" className="form-label">
+                    <Typography fontWeight={400} fontSize={16}>Kategorija</Typography>
+                </label>
                 <select value={categoryId} name="cars" id="cars" className={selectStyle} onChange={(e) => setCategoryId(e.target.value)}>
                     <option value="" disabled>Odaberi kategoriju</option>
                     {categories.map(category => (
@@ -209,7 +225,7 @@ const AddProductPage = (props) => {
             {/*<div className="mb-3">*/}
             {/*    <input type="text" className="form-control" id="phoneInput" value={activeCategory} />*/}
             {/*</div>*/}
-            <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleAddProduct}>Dodaj proizvod</button>
+            <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleAddProduct} style={{ width: '20%', border: '1px solid white', backgroundColor: '#b29e99', marginBottom: 50 }}>Dodaj proizvod</button>
         </div>
-    )
+    );
 }

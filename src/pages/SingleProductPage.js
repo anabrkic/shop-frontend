@@ -2,13 +2,14 @@ import React, {useEffect} from 'react';
 import useAxios from 'axios-hooks';
 import axios from "axios";
 import {Cart} from "../store/cart-store";
+import {white} from "../colors";
+import {Typography} from "../Typography";
 
 export const SingleProductPage = ({ match, history }) => {
     const [{ data, loading }] = useAxios(`http://localhost:4000/products/${match.params.id}`);
 
     useEffect(() => {
         const id = localStorage.getItem('userId');
-        console.log('id', id);
     }, []);
 
     if (loading) {
@@ -16,7 +17,6 @@ export const SingleProductPage = ({ match, history }) => {
     }
 
     const product = data[0] || undefined;
-    console.log('PRODUCT', product);
 
 
     // useEffectAsync(async () => {
@@ -44,15 +44,14 @@ export const SingleProductPage = ({ match, history }) => {
     }
 
     const loggedIn = !!localStorage.getItem('userId');
-    console.log('loggedIn', loggedIn);
 
     return (
-        <div className="container" style={{ paddingTop: 50 }}>
-            <div className="d-flex flex-row">
+        <div className="container">
+            <div className="d-flex flex-row" style={{ margin: '48px 0' }}>
                 <img
                     src={product?.imageUrl}
                     alt="Card image cap"
-                    style={{ width: '50%' }}
+                    style={{ width: '50%', borderRadius: 4, filter: 'drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1))' }}
                 />
                 <div
                     className="d-flex flex-column p-4 justify-content-between"
@@ -60,17 +59,20 @@ export const SingleProductPage = ({ match, history }) => {
                 >
                     <div>
                         <div className="d-flex flex-row justify-content-between p-3" style={{ borderBottom: '1px solid #f4f4f4' }}>
-                            <div style={{ fontSize: 24 }}>Naziv proizvoda</div>
-                            <div style={{ fontSize: 24, fontWeight: 'bold', height: 'auto' }}>{product?.name}</div>
+                            <Typography fontSize={24} color={white}>Naziv Proizvoda</Typography>
+                            <Typography fontSize={24} color={white}>{product?.name}</Typography>
                         </div>
                         <div className="d-flex flex-row justify-content-between p-3" style={{ borderBottom: '1px solid #f4f4f4' }}>
-                            <div style={{ fontSize: 24 }}>Opis proizvoda</div>
-                            <div style={{ fontSize: 24, fontWeight: 'bold', height: 'auto' }}>{product?.description}</div>
+                            <Typography fontSize={24} color={white}>Opis Proizvoda</Typography>
+                            <Typography fontSize={24} color={white}>{product?.description}</Typography>
+                        </div>
+                        <div className="d-flex flex-row justify-content-between p-3" style={{ borderBottom: '1px solid #f4f4f4' }}>
+                            <Typography fontSize={24} color={white}>Cijena</Typography>
+                            <Typography fontSize={24} color={white} fontWeight={600}>{`${product?.price},00kn`}</Typography>
                         </div>
                     </div>
-                    <div className="d-flex flex-row justify-content-between mt-3">
-                        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#535353' }}>{`${product?.price},00kn`}</div>
-                        <button className="btn btn-primary" onClick={handleAddToCart} style={{ width: '35%' }} disabled={!loggedIn}>Dodaj u kosaricu</button>
+                    <div className="d-flex flex-row justify-content-end mt-3">
+                        <button className="btn btn-primary" onClick={handleAddToCart} style={{ width: '35%', backgroundColor: 'transparent', borderColor: 'white' }} disabled={!loggedIn}>Dodaj u kosaricu</button>
                     </div>
                 </div>
             </div>

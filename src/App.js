@@ -15,6 +15,7 @@ import { HomePage } from './pages/HomePage';
 import { CongratulatePage } from './pages/CongratulatePage';
 import { AccountPage } from './pages/AccountPage';
 import {OrdersPage} from "./pages/OrdersPage";
+import {tan} from "./colors";
 
 function App() {
   const [role, setRole] = useState(undefined);
@@ -28,24 +29,26 @@ function App() {
   }, []);
 
   return (
-      <div>
+      <div style={{ backgroundColor: tan, height: '100vh' }}>
         <BrowserRouter>
             <Navbar />
-            <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/login" component={LoginPage} />
-                <Route exact path="/register" component={RegisterPage} />
-                <Route path="/products" component={ProductsPage} />
-                <Route path="/cart" component={CartPage} />
-                <Route path="/product/:id" component={SingleProductPage} />
-                {!id && <Redirect path="/login" />}
-                <Route path="/admin" component={AdminPage} />
-                <Route path="/congratulate" component={CongratulatePage} />
-                <Route path="/account/:id" component={AccountPage} />
-                <Route path="/order" component={OrderPage} />
-                <Route path="/orders/:id" component={OrdersPage} />
-                <Redirect path="/login" />
-            </Switch>
+            <div>
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/register" component={RegisterPage} />
+                    <Route path="/products/:id" component={ProductsPage} />
+                    <Route path="/cart" component={CartPage} />
+                    <Route path="/product/:id" component={SingleProductPage} />
+                    {!id && <Redirect path="/login" />}
+                    <Route path="/admin" component={AdminPage} />
+                    <Route path="/congratulate" component={CongratulatePage} />
+                    <Route path="/account/:id" component={AccountPage} />
+                    <Route path="/order" component={OrderPage} />
+                    <Route path="/orders/:id" component={OrdersPage} />
+                    <Redirect path="/login" />
+                </Switch>
+            </div>
             <Footer />
         </BrowserRouter>
       </div>

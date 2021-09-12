@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
 import { axios } from '../axios';
+import {Typography} from "../Typography";
 
 export const OrderPage = observer((props) => {
     const [firstName, setFirstName] = useState(undefined);
@@ -25,34 +26,48 @@ export const OrderPage = observer((props) => {
     return (
         <div className="container d-flex flex-row">
             <div className="w-50 p-5">
-                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>Podaci o kupcu</div>
+                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>
+                    <Typography>Podaci o kupcu</Typography>
+                </div>
                 <div className="mb-3">
-                    <label htmlFor="nameInput" className="form-label">Ime</label>
+                    <label htmlFor="nameInput" className="form-label">
+                        <Typography fontWeight={400} fontSize={16}>Ime</Typography>
+                    </label>
                     <input type="email" className="form-control" id="nameInput" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="surnameInput" className="form-label">Prezime</label>
+                    <label htmlFor="surnameInput" className="form-label">
+                        <Typography fontWeight={400} fontSize={16}>Prezime</Typography>
+                    </label>
                     <input type="text" className="form-control" id="surnameInput" value={lastName} onChange={(event) => setLastName(event.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="addressInput" className="form-label">Adresa</label>
+                    <label htmlFor="addressInput" className="form-label">
+                        <Typography fontWeight={400} fontSize={16}>Adresa</Typography>
+                    </label>
                     <input type="text" className="form-control" id="addressInput" value={address} onChange={(event) => setAddress(event.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="postalCodeInput" className="form-label">Postanski broj</label>
+                    <label htmlFor="postalCodeInput" className="form-label">
+                        <Typography fontWeight={400} fontSize={16}>Poštanski broj</Typography>
+                    </label>
                     <input type="text" className="form-control" id="postalCodeInput" value={postalCode} onChange={(event) => setPostalCode(event.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="cityInput" className="form-label">Grad</label>
+                    <label htmlFor="cityInput" className="form-label">
+                        <Typography fontWeight={400} fontSize={16}>Grad</Typography>
+                    </label>
                     <input type="text" className="form-control" id="cityInput" value={city} onChange={(event) => setCity(event.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="phoneInput" className="form-label">Telefon</label>
+                    <label htmlFor="phoneInput" className="form-label">
+                        <Typography fontWeight={400} fontSize={16}>Telefon</Typography>
+                    </label>
                     <input type="text" className="form-control" id="phoneInput" value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
                 </div>
             </div>
             <div className="w-50 p-5">
-                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>Podaci za dostavu</div>
+                <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}><Typography>Podaci za dostavu</Typography></div>
                 {Cart.cartItems.map(cartItem => (
                     <div className="d-flex flex-row pb-3">
                         <img
@@ -64,11 +79,16 @@ export const OrderPage = observer((props) => {
                             style={{ marginLeft: 50, width: '100%' }}
                         >
                             <div className="d-flex flex-row justify-content-between p-2" style={{ borderBottom: '1px solid #f4f4f4' }}>
-                                <div style={{ fontSize: 16, fontWeight: 'bold', height: 'auto' }}>{cartItem?.name}</div>
-                                <div style={{ fontSize: 16, fontWeight: 'bold', color: '#535353', marginLeft: 100 }}>{`${cartItem?.price},00kn`}</div>
+                                {/*<div style={{ fontSize: 16, fontWeight: 'bold', height: 'auto' }}>{cartItem?.name}</div>*/}
+                                <div><Typography>{cartItem?.name}</Typography></div>
+                                <div style={{ marginLeft: 100 }}>
+                                    <Typography>{`${cartItem?.price},00kn`}</Typography>
+                                </div>
                             </div>
                             <div className="d-flex flex-row p-2">
-                                <div style={{ fontSize: 16, fontWeight: 'bold' }}>{`Quantity: ${cartItem?.quantity}`}</div>
+                                <div style={{ fontSize: 16, fontWeight: 'bold' }}>
+                                    <Typography>{`Quantity: ${cartItem?.quantity}`}</Typography>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,18 +102,18 @@ export const OrderPage = observer((props) => {
                     </Form.Group>
                 </div>
                 <div className="d-flex flex-row justify-content-between mt-1">
-                    <div style={{ fontSize: 16 }}>Cijena</div>
-                    <div style={{ fontSize: 16, fontWeight: 'bold', color: '#535353' }}>{`${Cart.totalCost},00kn`}</div>
+                    <Typography fontSize={16}>Cijena</Typography>
+                    <Typography fontSize={16}>{`${Cart.totalCost},00kn`}</Typography>
                 </div>
                 <div className="d-flex flex-row justify-content-between mt-1">
-                    <div style={{ fontSize: 16 }}>Postarina</div>
-                    <div style={{ fontSize: 16, fontWeight: 'bold', color: '#535353' }}>Besplatno</div>
+                    <Typography fontSize={16}>Postarina</Typography>
+                    <Typography fontSize={16}>Besplatno</Typography>
                 </div>
                 <div className="d-flex flex-row justify-content-between mt-1">
-                    <div style={{ fontSize: 16 }}>Ukupno</div>
-                    <div style={{ fontSize: 16, fontWeight: 'bold', color: '#535353' }}>{`${Cart.totalCost},00kn`}</div>
+                    <Typography fontSize={16}>Ukupno</Typography>
+                    <Typography fontSize={16}>{`${Cart.totalCost},00kn`}</Typography>
                 </div>
-                <button type="submit" className="btn btn-primary w-100 mt-2" onClick={handleOrder}>Naruci</button>
+                <button type="submit" className="btn btn-primary w-100 mt-2" onClick={handleOrder} style={{ backgroundColor: '#b29e99', border: '1px solid white'  }}>Naruci</button>
             </div>
         </div>
     );

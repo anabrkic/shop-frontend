@@ -4,6 +4,7 @@ import { axios } from '../axios';
 import {Cart} from "../store/cart-store";
 import {observer} from "mobx-react-lite";
 import {statusLabels} from "./AdminOrdersPage";
+import {Typography} from "../Typography";
 
 export const OrdersPage = ({ match }) => {
     const [ordersData, setOrdersData] = useState([]);
@@ -19,15 +20,15 @@ export const OrdersPage = ({ match }) => {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-center" style={{ padding: '50px 0' }}>Narudzbe</div>
+            <div className="d-flex justify-content-center" style={{ padding: '50px 0' }}>Narudžbe</div>
             <table className="table">
                 <thead>
                 <tr>
-                    <th scope="col">Status</th>
-                    <th scope="col">Broj narudzbe</th>
-                    <th scope="col">Datum</th>
-                    <th scope="col">Lokacija dostave</th>
-                    <th scope="col">Cijena</th>
+                    <th scope="col"><Typography>Status</Typography></th>
+                    <th scope="col"><Typography>Broj narudžbe</Typography></th>
+                    <th scope="col"><Typography>Datum</Typography></th>
+                    <th scope="col"><Typography>Lokacija dostave</Typography></th>
+                    <th scope="col"><Typography>Cijena</Typography></th>
                 </tr>
                 </thead>
                 <tbody>

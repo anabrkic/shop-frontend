@@ -3,6 +3,7 @@ import {useEffectAsync} from "../useEffectAsync";
 import {axios} from "../axios";
 import {css} from "@emotion/css";
 import { set, find } from 'lodash';
+import {Typography} from "../Typography";
 
 const selectStyle = css`
     display: block;
@@ -31,7 +32,6 @@ export const AdminOrdersPage = (props) => {
         try {
             const { data } = await axios.get(`http://localhost:4000/orders`);
             setOrdersData(data);
-            console.log('data', data);
             const statuses = data.map(order => ({ id: order?._id, status: parseInt(order.status) }));
             setStatuses(statuses);
         } catch(err) {
@@ -69,19 +69,19 @@ export const AdminOrdersPage = (props) => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Broj narudzbe</th>
-                    <th scope="col">Datum</th>
-                    <th scope="col">Lokacija dostave</th>
-                    <th scope="col">Cijena</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col"><Typography>#</Typography></th>
+                    <th scope="col"><Typography>Status</Typography></th>
+                    <th scope="col"><Typography>Broj narudžbe</Typography></th>
+                    <th scope="col"><Typography>Datum</Typography></th>
+                    <th scope="col"><Typography>Lokacija dostave</Typography></th>
+                    <th scope="col"><Typography>Cijena</Typography></th>
+                    <th scope="col"><Typography>Izbriši</Typography></th>
                 </tr>
                 </thead>
                 <tbody>
                 {ordersData.map((order, index) => (
                     <tr key={order?._id}>
-                        <th scope="row">{index + 1}</th>
+                        <th scope="row"><Typography fontWeight={400} fontSize={16}>{index + 1}</Typography></th>
                         <td>
                             <select value={statuses[index]?.status} name="cars" id="cars" className={selectStyle} onChange={(e) => handleStatusUpdate(e, order?._id)}>
                                 <option value="" disabled>Odaberi status</option>
@@ -90,18 +90,18 @@ export const AdminOrdersPage = (props) => {
                                 ))}
                             </select>
                         </td>
-                        <td>{order?.orderCode}</td>
-                        <td>{order?.date}</td>
-                        <td>{`${order?.address}, ${order?.postalCode} ${order?.city}`}</td>
-                        <td>{`${order?.totalCost}`}</td>
+                        <td><Typography fontWeight={400} fontSize={16}>{order?.orderCode}</Typography></td>
+                        <td><Typography fontWeight={400} fontSize={16}>{order?.date}</Typography></td>
+                        <td><Typography fontWeight={400} fontSize={16}>{`${order?.address}, ${order?.postalCode} ${order?.city}`}</Typography></td>
+                        <td><Typography fontWeight={400} fontSize={16}>{`${order?.totalCost}`}</Typography></td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleOrderDelete(order?._id)}>
+                            <button type="submit" className="btn btn-primary" onClick={() => handleOrderDelete(order?._id)} style={{ width: 50, backgroundColor: 'transparent', borderColor: 'white' }}>
                                 X
                             </button>
                         </td>
                     </tr>
                 ))}
-                <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleSubmit}>Spremi izmjene</button>
+                <button type="submit" className="btn btn-primary" style={{ marginTop: 10 }} onClick={handleSubmit} style={{ width: 150, backgroundColor: '#b29e99', borderColor: 'white', marginBottom: 50, marginTop: 20 }}>Spremi izmjene</button>
                 </tbody>
             </table>
         </div>

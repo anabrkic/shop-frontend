@@ -3,43 +3,53 @@ import useAxios from 'axios-hooks';
 import axios from 'axios';
 import { css } from '@emotion/css';
 import {withRouter} from "react-router";
+import {useEffectAsync} from "../useEffectAsync";
+import {Typography} from "../Typography";
+import {white} from "../colors";
 
 const categoryNameStyle = css`
     border-bottom: 1px solid #f4f4f4;
     padding: 10px 5px;
 `;
 
-export const ProductsPage = () => {
+export const ProductsPage = ({ match }) => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [{ data, loading }] = useAxios(
-        'http://localhost:4000/categories'
-    );
+    // const [{ data, loading }] = useAxios(
+    //     'http://localhost:4000/categories'
+    // );
     const [products, setProducts] = useState([]);
     const [activeCategoryId, setActiveCategoryId] = useState([]);
 
-    useEffect(() => {
-        console.log('useEffect');
-    });
+    // if (loading) {
+    //     return null;
+    // }
 
-    if (loading) {
-        return null;
-    }
-
-    const handleCategoryClick = async (id) => {
-        try {
-            let response;
-            if (id === 0) {
-                response = await axios.get('http://localhost:4000/products');
-            } else {
-                response = await axios.get(`http://localhost:4000/category-products?categoryId=${id}`);
-            }
-            setProducts(response?.data);
-            setActiveCategoryId(id);
-        } catch(err) {
-            console.error(err);
+    useEffectAsync(async () => {
+        const { id } = match.params;
+        let response;
+        if (id === "0") {
+            response = await axios.get('http://localhost:4000/products');
+        } else {
+            response = await axios.get(`http://localhost:4000/category-products?categoryId=${id}`);
         }
-    }
+        setProducts(response?.data);
+    }, [match]);
+
+    // const handleCategoryClick = async (id) => {
+    //     try {
+    //         let response;
+    //         if (id === 0) {
+    //             response = await axios.get('http://localhost:4000/products');
+    //         } else {
+    //             response = await axios.get(`http://localhost:4000/category-products?categoryId=${id}`);
+    //         }
+    //         setProducts(response?.data);
+    //         setActiveCategoryId(id);
+    //     } catch(err) {
+    //         console.error(err);
+    //     }
+    // }
 
     const handleFilterChange = async (event) => {
         try {
@@ -63,7 +73,7 @@ export const ProductsPage = () => {
         }
     }
 
-    const productsPerPage = 2;
+    const productsPerPage = 4;
     const indexOfLast = currentPage * productsPerPage;
     const indexOfFirst = indexOfLast - productsPerPage;
     const currentProducts = products.slice(indexOfFirst, indexOfLast);
@@ -75,19 +85,16 @@ export const ProductsPage = () => {
 
     return (
         <div className="container d-flex w-100">
-            <div className="d-flex flex-column p-3">
-                <Categories categories={[{ _id: 0, name: 'Sve' }].concat(data)} onCategoryClick={handleCategoryClick}/>
-            </div>
-            <div>
+            <div style={{ width: '100%' }}>
                 <div className="p-4">
                     <div className="d-flex flex-row">
-                        <select className="form-select" style={{ width: '30%', marginRight: 10 }} onChange={handleFilterChange}>
+                        <select className="form-select" style={{ width: '10%', marginRight: 10 }} onChange={handleFilterChange}>
                             <option value="" disabled selected hidden>Filter</option>
                             <option value="all">Sve</option>
                             <option value="gold">Zlato</option>
                             <option value="silver">Srebro</option>
                         </select>
-                        <select className="form-select" style={{ width: '30%' }} onChange={handleSortChange}>
+                        <select className="form-select" style={{ width: '10%' }} onChange={handleSortChange}>
                             <option value="" disabled selected hidden>Sort</option>
                             <option value="priceAsc">Cijena, niska prema visokoj</option>
                             <option value="priceDesc">Cijena, visoka prema niskoj</option><option value="bestSelling">Najprodavanije</option>
@@ -97,12 +104,21 @@ export const ProductsPage = () => {
                 {currentProducts?.length === 0 && <div className="p-3">Nema proizvoda</div>}
                 {currentProducts?.length > 0 && (
                     <div className="d-flex flex-wrap p-3 w-100">
-                        {currentProducts.map(product => <Card product={product} />)}
+                        {currentProducts.map(product => <Card2 product={product} />)}
                     </div>
                 )}
-                <ul className="pagination justify-content-center">
+                <ul className="pagination justify-content-center" style={{ marginBottom: 64 }}>
                     {pageNumbers.map(number => (
-                        <li className={`page-item ${currentPage === number ? 'active' : 'none'}`}><a className="page-link" href="#" onClick={() => setCurrentPage(number)}>{number}</a></li>
+                        <li className={`page-item ${currentPage === number ? 'active' : 'none'}`} onClick={() => {
+                            debugger;
+                            setCurrentPage(number)
+                        }}>
+                            <a
+                                className="page-link"
+                                >
+                                    {number}
+                            </a>
+                        </li>
                     ))}
                 </ul>
             </div>
@@ -110,36 +126,13 @@ export const ProductsPage = () => {
     );
 }
 
-const Categories = ({ categories, onCategoryClick }) => {
-    return (
-        <>
-            {categories.map(category => (
-                <div
-                    className={categoryNameStyle}
-                    onClick={() => onCategoryClick(category._id)}
-                    style={{ cursor: 'pointer' }}
-                >
-                    {category.name}
-                </div>
-            ))}
-        </>
-    )
-}
-
-const Card = withRouter(({ history, product }) => {
-    return (
-        <div>
-            <div className="card" style={{ width: 350, marginRight: 10 }}>
-                <img className="card-img-top" src={product?.imageUrl} alt="Card image cap" style={{ height: 300, width: '100%' }} />
-                <div className="card-body">
-                    <h5 className="card-title">{product?.name}</h5>
-                    <p className="card-text">{product?.description}</p>
-                    <div className="d-flex flex-row justify-content-between">
-                        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#535353' }}>{`${product?.price},00kn`}</div>
-                        <a href="#" className="btn btn-primary" onClick={() => history.push(`/product/${product?._id}`)}>Kupi</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+const Card2 = withRouter(({ history, product }) => {
+   return (
+       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', marginBottom: 32 }} onClick={() => history.push(`/product/${product?._id}`)}>
+           <img src={product?.imageUrl} alt="Card image cap" style={{ marginBottom: 16, height: 300, width: 300, borderRadius: 4, filter: 'drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1))' }} />
+           <Typography fontSize={18} color={white}>{product?.name}</Typography>
+           <Typography fontSize={14} color={white}>{product?.description}</Typography>
+           <Typography fontSize={14} color={white}>{`${product?.price},00kn`}</Typography>
+       </div>
+   );
 });

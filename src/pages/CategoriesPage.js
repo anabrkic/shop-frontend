@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {useEffectAsync} from "../useEffectAsync";
 import {axios} from "../axios";
+import {Typography} from "../Typography";
 
 export const CategoriesPage = ({ history }) => {
     const [categories, setCategories] = useState([]);
 
     useEffectAsync(async () => {
         const response = await axios.get('categories');
-        console.log('CATEGORIES', response);
         setCategories(response.data);
     }, []);
 
@@ -27,18 +27,18 @@ export const CategoriesPage = ({ history }) => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col"><Typography>#</Typography></th>
+                    <th scope="col"><Typography>Name</Typography></th>
+                    <th scope="col"><Typography>Izbriši</Typography></th>
                 </tr>
                 </thead>
                 <tbody>
                 {categories.map((category, index) => (
                     <tr>
-                        <th scope="row">{index + 1}</th>
-                        <td>{category.name}</td>
+                        <th scope="row"><Typography fontWeight={400} fontSize={16}>{index + 1}</Typography></th>
+                        <td><Typography fontWeight={400} fontSize={16}>{category.name}</Typography></td>
                         <td>
-                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(category._id)}>
+                            <button type="submit" className="btn btn-primary" onClick={() => handleDelete(category._id)} style={{ width: 50, backgroundColor: 'transparent', borderColor: 'white' }}>
                                 X
                             </button>
                         </td>
@@ -46,7 +46,7 @@ export const CategoriesPage = ({ history }) => {
                 ))}
                 </tbody>
             </table>
-            <button type="submit" className="btn btn-primary" onClick={handleAddCategory}>
+            <button type="submit" className="btn btn-primary" onClick={handleAddCategory} style={{ width: 200, backgroundColor: '#b29e99', borderColor: 'white', marginBottom: 50 }}>
                 Dodaj kategoriju
             </button>
         </div>
