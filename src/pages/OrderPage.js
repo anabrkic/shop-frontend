@@ -24,7 +24,7 @@ export const OrderPage = observer((props) => {
     }
 
     return (
-        <div className="container d-flex flex-row">
+        <form className="container d-flex flex-row" onSubmit={handleOrder}>
             <div className="w-50 p-5">
                 <div className="d-flex justify-content-center titleStyle" style={{ margin: '50px 0' }}>
                     <Typography>Podaci o kupcu</Typography>
@@ -33,37 +33,37 @@ export const OrderPage = observer((props) => {
                     <label htmlFor="nameInput" className="form-label">
                         <Typography fontWeight={400} fontSize={16}>Ime</Typography>
                     </label>
-                    <input type="email" className="form-control" id="nameInput" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
+                    <input required type="email" className="form-control" id="nameInput" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="surnameInput" className="form-label">
                         <Typography fontWeight={400} fontSize={16}>Prezime</Typography>
                     </label>
-                    <input type="text" className="form-control" id="surnameInput" value={lastName} onChange={(event) => setLastName(event.target.value)} />
+                    <input required type="text" className="form-control" id="surnameInput" value={lastName} onChange={(event) => setLastName(event.target.value)} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="addressInput" className="form-label">
                         <Typography fontWeight={400} fontSize={16}>Adresa</Typography>
                     </label>
-                    <input type="text" className="form-control" id="addressInput" value={address} onChange={(event) => setAddress(event.target.value)} />
+                    <input required type="text" className="form-control" id="addressInput" value={address} onChange={(event) => setAddress(event.target.value)} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="postalCodeInput" className="form-label">
                         <Typography fontWeight={400} fontSize={16}>Poštanski broj</Typography>
                     </label>
-                    <input type="text" className="form-control" id="postalCodeInput" value={postalCode} onChange={(event) => setPostalCode(event.target.value)} />
+                    <input required type="text" className="form-control" id="postalCodeInput" value={postalCode} onChange={(event) => setPostalCode(event.target.value)} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="cityInput" className="form-label">
                         <Typography fontWeight={400} fontSize={16}>Grad</Typography>
                     </label>
-                    <input type="text" className="form-control" id="cityInput" value={city} onChange={(event) => setCity(event.target.value)} />
+                    <input required type="text" className="form-control" id="cityInput" value={city} onChange={(event) => setCity(event.target.value)} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="phoneInput" className="form-label">
                         <Typography fontWeight={400} fontSize={16}>Telefon</Typography>
                     </label>
-                    <input type="text" className="form-control" id="phoneInput" value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
+                    <input required type="text" className="form-control" id="phoneInput" value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
                 </div>
             </div>
             <div className="w-50 p-5">
@@ -113,8 +113,8 @@ export const OrderPage = observer((props) => {
                     <Typography fontSize={16}>Ukupno</Typography>
                     <Typography fontSize={16}>{`${Cart.totalCost},00kn`}</Typography>
                 </div>
-                <button type="submit" className="btn btn-primary w-100 mt-2" onClick={handleOrder} style={{ backgroundColor: '#b29e99', border: '1px solid white'  }}>Naruci</button>
+                <input type="submit" style={{ width: '100%', backgroundColor: '#b29e99', border: '1px solid white', padding: 5, borderRadius: 4, color: 'white' }} value="Naruci" />
             </div>
-        </div>
+        </form>
     );
-})
+});

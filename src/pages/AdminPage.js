@@ -16,6 +16,7 @@ export const AdminPage = () => {
                 <Route path="/admin/users" component={UsersPage} />
                 <Route exact path="/admin/products" component={ProductsPage} />
                 <Route exact path="/admin/products/add" component={AddProductPage} />
+                <Route exact path="/admin/products/:id" component={EditProductPage} />
                 <Route exact path="/admin/orders" component={AdminOrdersPage} />
                 <Route exact path="/admin/categories" component={CategoriesPage} />
                 <Route exact path="/admin/categories/add" component={AddCategoryPage} />
@@ -90,13 +91,18 @@ const ProductsPage = (props) => {
         props.history.push('/admin/products/add');
     }
 
+    const handleEditProduct = async (id) => {
+        console.log('product id', id);
+        props.history.push(`/admin/products/${id}`);
+    }
+
     return (
         <div className="container mt-5">
             <table className="table">
                 <thead>
                 <tr>
                     <th scope="col"><Typography fontWeight={400} fontSize={16}>#</Typography></th>
-                    <th scope="col"><Typography fontWeight={400} fontSize={16}>Name</Typography></th>
+                    <th scope="col"><Typography fontWeight={400} fontSize={16}>Ime</Typography></th>
                     <th scope="col"><Typography fontWeight={400} fontSize={16}>Materijal</Typography></th>
                     <th scope="col"><Typography fontWeight={400} fontSize={16}>Cijena</Typography></th>
                     <th scope="col"><Typography fontWeight={400} fontSize={16}>Izbriši</Typography></th>
@@ -104,7 +110,7 @@ const ProductsPage = (props) => {
                 </thead>
                 <tbody>
                 {products.map((user, index) => (
-                    <tr>
+                    <tr onClick={() => handleEditProduct(user._id)}>
                         <th scope="row"><Typography fontWeight={400} fontSize={16}>{index + 1}</Typography></th>
                         <td><Typography fontWeight={400} fontSize={16}>{user.name}</Typography></td>
                         <td><Typography fontWeight={400} fontSize={16}>{user.material}</Typography></td>
@@ -229,3 +235,60 @@ const AddProductPage = (props) => {
         </div>
     );
 }
+
+export const EditProductPage = ({ match, history }) => {
+    const [productData, setProductData] = useState({});
+
+    useEffectAsync(async () => {
+        try {
+            const { data } = await axios.get(`http://localhost:4000/products/${match.params.id}`);
+            setProductData(data[0]);
+        } catch(err) {
+            console.error(err);
+        }
+    }, []);
+
+    const handleChange = (event, key) => {
+        const userDataCopy = {...productData};
+        userDataCopy[key] = event.target.value;
+        setProductData(userDataCopy);
+    }
+
+    const handleSubmit = async () => {
+        debugger;
+        try {
+            await axios.put(`http://localhost:4000/products/${match.params.id}`, { ...productData });
+            window.location.reload();
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+    return (
+        <div className="d-flex flex-column align-items-center w-100 mt-5">
+            <div className="d-flex justify-content-center titleStyle">
+                <Typography fontWeight={600} fontSize={24} color={white}>Edit Proizvoda</Typography>
+            </div>
+            <div className="mb-3 w-50">
+                <label htmlFor="nameInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16} color={white}>Ime</Typography>
+                </label>
+                <input type="email" className="form-control" id="nameInput" value={productData.name} onChange={(event) => handleChange(event, 'name')} />
+            </div>
+            <div className="mb-3 w-50">
+                <label htmlFor="materialInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16} color={white}>Materijal</Typography>
+                </label>
+                <input type="text" className="form-control" id="materialInput" value={productData.material} onChange={(event) => handleChange(event, 'material')} />
+            </div>
+            <div className="mb-3 w-50">
+                <label htmlFor="priceInput" className="form-label">
+                    <Typography fontWeight={400} fontSize={16} color={white}>Cijena</Typography>
+                </label>
+                <input type="text" className="form-control" id="priceInput" value={productData.price} onChange={(event) => handleChange(event, 'price')} />
+            </div>
+            <button type="submit" className="btn btn-primary w-50 mt-2" onClick={handleSubmit} style={{ width: '100%', border: '1px solid white', backgroundColor: '#b29e99', marginBottom: 50 }}>Pohrani podatke</button>
+        </div>
+    );
+}
+
