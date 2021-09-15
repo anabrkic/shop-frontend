@@ -109,12 +109,12 @@ export const ProductsPage = ({ match }) => {
                 )}
                 <ul className="pagination justify-content-center" style={{ marginBottom: 64 }}>
                     {pageNumbers.map(number => (
-                        <li className={`page-item ${currentPage === number ? 'active' : 'none'}`} onClick={() => {
-                            debugger;
+                        <li style={{ cursor: 'pointer'}} className={`page-item ${currentPage === number ? 'active' : 'none'}`} onClick={() => {
                             setCurrentPage(number)
                         }}>
                             <a
                                 className="page-link"
+                                style={currentPage === number ? { backgroundColor: 'lightgrey', border: '1px solid grey', color: 'black' } : { backgroundColor: 'white', border: '1px solid grey', color: 'black' }}
                                 >
                                     {number}
                             </a>
