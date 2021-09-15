@@ -106,11 +106,12 @@ const ProductsPage = (props) => {
                     <th scope="col"><Typography fontWeight={400} fontSize={16}>Materijal</Typography></th>
                     <th scope="col"><Typography fontWeight={400} fontSize={16}>Cijena</Typography></th>
                     <th scope="col"><Typography fontWeight={400} fontSize={16}>Izbriši</Typography></th>
+                    <th scope="col"><Typography fontWeight={400} fontSize={16}>Uredi</Typography></th>
                 </tr>
                 </thead>
                 <tbody>
                 {products.map((user, index) => (
-                    <tr onClick={() => handleEditProduct(user._id)}>
+                    <tr>
                         <th scope="row"><Typography fontWeight={400} fontSize={16}>{index + 1}</Typography></th>
                         <td><Typography fontWeight={400} fontSize={16}>{user.name}</Typography></td>
                         <td><Typography fontWeight={400} fontSize={16}>{user.material}</Typography></td>
@@ -118,6 +119,11 @@ const ProductsPage = (props) => {
                         <td>
                             <button type="submit" className="btn btn-primary" onClick={() => handleDelete(user._id)} style={{ width: 50, backgroundColor: 'transparent', borderColor: 'white' }}>
                                 X
+                            </button>
+                        </td>
+                        <td>
+                            <button type="submit" className="btn btn-primary" onClick={() => handleEditProduct(user._id)} style={{ width: 50, backgroundColor: 'transparent', borderColor: 'white' }}>
+                                EDIT
                             </button>
                         </td>
                     </tr>
